@@ -12,6 +12,8 @@ domande = ["Cos'è la CPU?", "Cosa significa RAM?", "Cos'è un bit?"]
 
 risposta_1 = ["Central Processing Unit", "Computer Processors United", "Company Planning UK"]
 risposta_2 = ["Random Access Memory", "Return And Mix", "Rage Against Machines"]
+risposta_3 = ["Un'unità di memoria", "Un simbolo nel codice", "Un elemento grafico"]
 
 mostra_domande(domande[0], risposta_1)
 mostra_domande(domande[1], risposta_2)
+mostra_domande(domande[2], risposta_3)
