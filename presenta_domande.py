@@ -12,7 +12,10 @@ def mostra_domande(domanda: str, risposte: list):
     if int(risp_utente) == x:
         print("Complimenti, risposta corretta!\n")
     else:
-        print(f"Risposta errata\n") # DA FARE : la risposta corretta era {risposte.get(True)}
+        for option, value in risposte.items():
+            if value == True:
+                risposta_giusta = "" # DA FARE
+        print(f"Risposta errata. La risposta corretta era {risposte.get(True)}\n") # NON FUNZIONA
 
 domande = ["Cos'è la CPU?",
            "Cosa significa RAM?",
