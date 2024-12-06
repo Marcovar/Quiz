@@ -1,26 +1,25 @@
-def mostra_domande(domanda: str, risposte: list):
+import random
+def mostra_domande(domanda: str, risposte: dict):
     print(f"Domanda: {domanda}")
     i = 1
     x = 0
-    # SHUFFLE
+    risposte_mescolate = random.shuffle(risposte) # SHUFFLE NON FUNZIONA
     for option, value in risposte.items():
         print(f"{i}. {option}")
         if value == True:
             x = i
+            risposta_giusta = option
         i += 1
     risp_utente = input(f"Scegli una risposta indicando il numero corrispondente: ")
     if int(risp_utente) == x:
         print("Complimenti, risposta corretta!\n")
-    else:
-        for option, value in risposte.items():
-            if value == True:
-                risposta_giusta = option
-        print(f"Risposta errata. La risposta corretta era {risposta_giusta}.")
+    else: 
+        print(f"Risposta errata. La risposta corretta era: {risposta_giusta}.")
 
 domande = ["Cos'è la CPU?",
            "Cosa significa RAM?",
            "Cos'è un bit?"]
-risp = [
+risposte = [
         {"Central Processing Unit": True,
         "Computer Processors United": False,
         "Company Planning UK": False},
@@ -44,4 +43,4 @@ risp = [
 # mostra_domande(domande[2], risposta_3)
 
 for n in range(len(domande)):
-    mostra_domande(domande[n], risp[n])
+    mostra_domande(domande[n], risposte[n])
