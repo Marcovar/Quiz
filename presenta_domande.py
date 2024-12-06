@@ -14,8 +14,8 @@ def mostra_domande(domanda: str, risposte: list):
     else:
         for option, value in risposte.items():
             if value == True:
-                risposta_giusta = "" # DA FARE
-        print(f"Risposta errata. La risposta corretta era {risposte.get(True)}\n") # NON FUNZIONA
+                risposta_giusta = option
+        print(f"Risposta errata. La risposta corretta era {risposta_giusta}.")
 
 domande = ["Cos'è la CPU?",
            "Cosa significa RAM?",
