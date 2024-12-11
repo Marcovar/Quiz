@@ -1,0 +1,9 @@
+while True:
+    user_input = input("Digita 'esci' per terminare il test o 'inizia' per ricominciare: ")
+    if user_input.lower() == 'inizia' :
+        mostra_domande()
+    elif user_input.lower() == 'esci':
+        print("Il test è terminato.")
+        break
+    else:
+        print(f"Hai digitato: {user_input}")
