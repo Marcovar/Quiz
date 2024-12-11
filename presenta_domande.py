@@ -3,8 +3,9 @@ def mostra_domande(domanda: str, risposte: dict):
     print(f"Domanda: {domanda}")
     i = 1
     x = 0
-    risposte_mescolate = random.shuffle(risposte) # SHUFFLE NON FUNZIONA
-    for option, value in risposte.items():
+    risposte_tuple = list(risposte.items())
+    random.shuffle(risposte_tuple)
+    for option, value in risposte_tuple:
         print(f"{i}. {option}")
         if value == True:
             x = i
@@ -14,7 +15,7 @@ def mostra_domande(domanda: str, risposte: dict):
     if int(risp_utente) == x:
         print("Complimenti, risposta corretta!\n")
     else: 
-        print(f"Risposta errata. La risposta corretta era: {risposta_giusta}.")
+        print(f"Risposta errata. La risposta corretta era: {risposta_giusta}.\n")
 
 domande = ["Cos'è la CPU?",
            "Cosa significa RAM?",
@@ -29,7 +30,7 @@ risposte = [
         {"Un'unità di memoria": True,
         "Un simbolo nel codice": False,
         "Un elemento grafico": False}
-]
+        ]
 # risposta_giusta_1 = "Central Processing Unit"
 # risposta_giusta_2 = "Random Access Memory"
 # risposta_giusta_3 = "Un'unità di memoria"
