@@ -35,20 +35,26 @@ def mostra_domande(domanda: str, risposte: dict):
     #         print("Risposta non valida.")
 
 def verifica_risposta(numero_giusto, risp_giusta):
-    """Verifica se la risposta dell'utente è vera o falsa, assegna un punteggio e mostra la risposta giusta"""
+    """Verifica se la risposta dell'utente è vera o falsa,
+    assegna un punteggio e mostra la risposta giusta"""
 
     risp_utente = input(f"Scegli una risposta indicando il numero corrispondente: ")
 
     try:
         if int(risp_utente) == numero_giusto:
             print("Complimenti, risposta corretta!\n")    
-            return 1   
+            return 1        
         else:
             print(f"Risposta sbagliata. La risposta corretta era: {risp_giusta}.\n")
             return 0
     except:
-            print("Risposta non valida. Inserisci un numero.")
-            verifica_risposta(numero_giusto, risp_giusta)
+            # if risp_utente == "Q".lower():
+            #     print("Hai scelto di chiudere il quiz. Alla prossima!")
+            #     pass
+            # else:
+                print("Risposta non valida. Inserisci un numero o digita Q per chiudere il quiz.")
+                return(verifica_risposta(numero_giusto, risp_giusta))
+            
 
 
 def conteggio_finale(conta_giuste):
