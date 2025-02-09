@@ -1,5 +1,10 @@
 import random
 
+def mescola_elementi(dizionario):
+    database_list = list(dizionario.items())
+    random.shuffle(database_list)
+    return dict(database_list)
+    
 def mostra_domande(domanda: str, risposte: dict):
     """Presenta le domande e le risposte. Le risposte sono in ordine casuale. 
     L'utente può rispondere e riceve un messaggio diverso a seconda che la risposta sia giusta o sbagliata"""
@@ -7,11 +12,11 @@ def mostra_domande(domanda: str, risposte: dict):
     print(f"Domanda: {domanda}")
     numero_opzione = 1
 
-    risposte_tuple = list(risposte.items())
-    random.shuffle(risposte_tuple) # mescolo l'ordine delle risposte
+    # risposte_tuple = list(risposte.items())
+    # random.shuffle(risposte_tuple) # mescolo l'ordine delle risposte
     
     # mostro tutte le risposte per una domanda
-    for opzione, verità in risposte_tuple:
+    for opzione, verità in mescola_elementi(risposte).items():
         print(f"{numero_opzione}. {opzione}")
         
         if verità == True:
@@ -72,7 +77,7 @@ def ripeti_quiz():
     elif risposta == "S".lower():
         ciclo_quiz()
     else:
-        print("Risposta non valida. Digita S oppure N.")
+        print("Risposta non valida. Digita S per continuare oppure N per chiudere.")
         ripeti_quiz()
 
 def inizia_quiz():
