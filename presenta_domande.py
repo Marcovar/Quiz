@@ -48,10 +48,10 @@ def verifica_risposta(numero_giusto, risp_giusta):
             print(f"Risposta sbagliata. La risposta corretta era: {risp_giusta}.\n")
             return 0
     except:
-            # if risp_utente == "Q".lower():
-            #     print("Hai scelto di chiudere il quiz. Alla prossima!")
-            #     pass
-            # else:
+            if risp_utente == "Q".lower():
+                print("Hai scelto di chiudere il quiz. Alla prossima!")
+                pass
+            else:
                 print("Risposta non valida. Inserisci un numero o digita Q per chiudere il quiz.")
                 return(verifica_risposta(numero_giusto, risp_giusta))
             
@@ -115,9 +115,11 @@ risposte = [
 
 def ciclo_quiz():
     """Esegue tutti gli step del quiz"""
-
-    conteggio_finale(inizia_quiz())
-    ripeti_quiz()
+    try:
+        conteggio_finale(inizia_quiz())
+        ripeti_quiz()
+    except:
+        pass
 
 
 ciclo_quiz()
