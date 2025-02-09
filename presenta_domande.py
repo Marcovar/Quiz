@@ -1,47 +1,40 @@
 import random
 
 def mescola_elementi(dizionario):
+    """Prende gli elementi all'interno di un dizionario e li mette in ordine casuale"""
+
     database_list = list(dizionario.items())
     random.shuffle(database_list)
     return dict(database_list)
     
-def mostra_domande(domanda: str, risposte: dict):
-    """Presenta le domande e le risposte. Le risposte sono in ordine casuale. 
-    L'utente può rispondere e riceve un messaggio diverso a seconda che la risposta sia giusta o sbagliata"""
+def mostra_domande(database: dict):
+    """Presenta le domande e le opzioni di risposta in ordine casuale.
+    Domande e risposte hanno un contatore."""
 
-    print(f"Domanda: {domanda}")
-    numero_opzione = 1
+    conta_domande = 0
+    conta_risposte_giuste = 0
 
-    # risposte_tuple = list(risposte.items())
-    # random.shuffle(risposte_tuple) # mescolo l'ordine delle risposte
+    for domanda, risposte in (mescola_elementi(database)).items():
+        conta_domande += 1
+        print(f"Domanda {conta_domande}: {domanda}")
+        numero_opzione = 1
+        for opzione, verità in (mescola_elementi(risposte)).items():
+            print(f"{numero_opzione}. {opzione}")
     
-    # mostro tutte le risposte per una domanda
-    for opzione, verità in mescola_elementi(risposte).items():
-        print(f"{numero_opzione}. {opzione}")
-        
-        if verità == True:
-            numero_risp_giusta = numero_opzione
-            risposta_giusta = opzione
+            if verità == True:
+                numero_risp_giusta = numero_opzione
+                risposta_giusta = opzione
 
-        numero_opzione += 1
-    
-    return verifica_risposta(numero_risp_giusta, risposta_giusta)
+            numero_opzione += 1
 
-    # risp_utente = input(f"Scegli una risposta indicando il numero corrispondente: ")
-
-    # if int(risp_utente) == numero_risp_giusta:
-    #     print("Complimenti, risposta corretta!\n")    
-    #     return 1   
-    # else:
-    #     try:
-    #         print(f"Risposta sbagliata. La risposta corretta era: {risposta_giusta}.\n")
-    #         return 0
-    #     except:
-    #         print("Risposta non valida.")
+        conta_risposte_giuste += verifica_risposta(numero_risp_giusta, risposta_giusta)
+    return conta_risposte_giuste
 
 def verifica_risposta(numero_giusto, risp_giusta):
     """Verifica se la risposta dell'utente è vera o falsa,
-    assegna un punteggio e mostra la risposta giusta"""
+    assegna un punteggio e mostra la risposta giusta.
+    Gestisce le eccezioni in caso di risposta non numerica
+    e con una Q permette di uscire dal programma."""
 
     risp_utente = input(f"Scegli una risposta indicando il numero corrispondente: ")
 
@@ -65,7 +58,7 @@ def verifica_risposta(numero_giusto, risp_giusta):
 def conteggio_finale(conta_giuste):
     """Mostra il risultato finale del quiz con il numero di risposte corrette sul totale"""
 
-    print(f"Il quiz è finito.\nHai risposto correttamente a {conta_giuste} domande su {len(domande)}.")
+    print(f"Il quiz è finito.\nHai risposto correttamente a {conta_giuste} domande su {len(dom_risp)}.")
 
 
 def ripeti_quiz():
@@ -85,38 +78,62 @@ def inizia_quiz():
     Passa il risultato alla funzione per calcolare il risultato finale"""
 
     print("Iniziamo il quiz!\n")
-    conta_risposte_giuste = 0
-    for n in range(len(domande)):
-        conta_risposte_giuste += mostra_domande(domande[n], risposte[n])
-    return conta_risposte_giuste
+    return mostra_domande(dom_risp)
 
-domande = ["Cos'è la CPU?",
-           "Cosa significa RAM?",
-           "Cos'è un bit?",
-           "Quando è uscita la prima versione di Python?",
-           "Quale di questi è un linguaggio di programmazione?"]
+# # domande = ["Cos'è la CPU?",
+#            "Cosa significa RAM?",
+#            "Cos'è un bit?",
+#            "Quando è uscita la prima versione di Python?",
+#            "Quale di questi è un linguaggio di programmazione?"]
 
-risposte = [
-        {"Central Processing Unit": True,
-        "Computer Processors United": False,
-        "Company Planning UK": False},
+# risposte = [
+        # {"Central Processing Unit": True,
+        # "Computer Processors United": False,
+        # "Company Planning UK": False},
 
-        {"Random Access Memory": True,
-        "Return And Mix": False,
-        "Rage Against Machines": False},
+        # {"Random Access Memory": True,
+        # "Return And Mix": False,
+        # "Rage Against Machines": False},
 
-        {"Un'unità di memoria": True,
-        "Un simbolo nel codice": False,
-        "Un elemento grafico": False},
+        # {"Un'unità di memoria": True,
+        # "Un simbolo nel codice": False,
+        # "Un elemento grafico": False},
         
-        {"1991": True,
-        "1978": False,
-        "1985": False},
+        # {"1991": True,
+        # "1978": False,
+        # "1985": False},
         
-        {"C++": True,
-        "D--": False,
-        "E==": False}
-        ]
+        # {"C++": True,
+        # "D--": False,
+        # "E==": False}
+        # ]
+
+dom_risp = {
+            "Cos'è la CPU?":
+            {"Central Processing Unit": True,
+            "Computer Processors United": False,
+            "Company Planning UK": False},
+
+           "Cosa significa RAM?":
+           {"Random Access Memory": True,
+            "Return And Mix": False,
+            "Rage Against Machines": False},
+            
+            "Cos'è un bit?":
+            {"Un'unità di memoria": True,
+            "Un simbolo nel codice": False,
+            "Un elemento grafico": False},
+
+            "Quando è uscita la prima versione di Python?":
+            {"1991": True,
+            "1978": False,
+            "1985": False},
+
+            "Quale di questi è un linguaggio di programmazione?":
+            {"C++": True,
+            "D--": False,
+            "E==": False}
+            }
 
 def ciclo_quiz():
     """Esegue tutti gli step del quiz"""
